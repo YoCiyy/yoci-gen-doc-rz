@@ -7,12 +7,15 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * ÈíÖøÎÄµµµ¼³ö µ¼³ötxtÎÄµµ v1.0
+ * è½¯è‘—æ–‡æ¡£å¯¼å‡º å¯¼å‡ºtxtæ–‡æ¡£ å¤§çº¦3000è¡Œæºä»£ç  v1.0
  */
 public class txtUtils {
 
-	// É¨ÃèµÄÔ´´úÂë
-	public static String PROJECT_URL = "D:\\javaDemo1\\jeecg-boot";
+	// æ‰«æçš„æºä»£ç 
+	public static String PROJECT_URL = "D:\\javaDemo1\\text-boot";
+
+	// æ–‡æ¡£è¾“å‡ºè·¯å¾„
+	public static String OUT_PATH = "D:\\doc\\";
 
 	public static void main(String[] args) throws IOException {
 
@@ -20,7 +23,6 @@ public class txtUtils {
 		List<File> fileList = coreUtils.getFiles(f);
 		long leftLines = 0;
 
-		// ÕıÏò fileList
 		StringBuffer sb = new StringBuffer();
 
 		for (int i = 0; i < fileList.size(); i++) {
@@ -28,17 +30,16 @@ public class txtUtils {
 			List<String> contentList = FileUtils.readLines(item, "UTF-8");
 
 			for (String content : contentList) {
-				content = content.trim().replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("&", "&amp;");
 				if (content.length() == 0) {
 					continue;
 				}
-				// Ìø¹ı¹¦ÄÜ×¢ÊÍ Ìø¹ı°æÈ¨×¢ÊÍ
-				if (content.startsWith("/") || content.startsWith("*")) {
+				// è·³è¿‡åŠŸèƒ½æ³¨é‡Š è·³è¿‡ç‰ˆæƒæ³¨é‡Š
+				if (content.contains("/") || content.contains("*")) {
 					continue;
 				}
-				// 2950ĞĞ´óÔ¼60Ò³ÎÄµµ
+				// 2950è¡Œå¤§çº¦3000é¡µ
 				if (leftLines > 2950) {
-					FileUtils.write(new File("D:\\doc\\" + System.currentTimeMillis() + ".txt"), sb.toString(), "UTF-8");
+					FileUtils.write(new File(OUT_PATH + System.currentTimeMillis() + ".txt"), sb.toString(), "UTF-8");
 					leftLines = 0;
 					sb.setLength(0);
 					break;

@@ -14,7 +14,7 @@ import java.util.Map;
 public class docUtils {
 
 	// 扫描的源代码
-	public static String PROJECT_URL = "D:\\javaDemo1\\spring-boot";
+	public static String PROJECT_URL = "D:\\javaDemo1\\text-boot";
 	// 文档输出路径
 	public static String OUT_PATH = "D:\\doc\\";
 
